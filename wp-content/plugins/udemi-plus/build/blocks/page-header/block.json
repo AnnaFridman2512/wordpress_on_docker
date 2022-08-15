@@ -8,11 +8,12 @@
   "textdomain": "udemy-plus",
   "attributes": {
     "content": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "showCategory": {
       "type": "boolean",
-      "default": true
+      "default": false
     }
   },
   "editorScript": "file:./index.js",
