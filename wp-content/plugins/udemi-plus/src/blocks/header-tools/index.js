@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import icons from '../../icons.js'
 import './main.css'
@@ -10,12 +10,22 @@ registerBlockType('udemy-plus/header-tools', {
     src: icons.primary
   },
   edit({ attributes, setAttributes }) {
+    const {showauth} = attributes
     const blockProps = useBlockProps();
 
     return (
       <>
         <InspectorControls>
           <PanelBody title={ __('General', 'udemy-plus') }>
+            <SelectControl 
+            label={__('Show Login/Register link', 'udey-plus')}
+            value={showauth}
+            options={[
+                {label: __('No', 'udemy-plus'), value: false},
+                {label: __('Yes', 'udemy-plus'), value: true}
+            ]}
+            onChange={newVal => setAttributes({showauth: (newVal === "true")}) }
+            />
             Panel Body Content
           </PanelBody>
         </InspectorControls>
