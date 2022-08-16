@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, SelectControl } from '@wordpress/components';
+import { useBlockProps, InspectorControls} from '@wordpress/block-editor';
+import { PanelBody, SelectControl, CheckboxControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import icons from '../../icons.js'
 import './main.css'
@@ -10,7 +10,7 @@ registerBlockType('udemy-plus/header-tools', {
     src: icons.primary
   },
   edit({ attributes, setAttributes }) {
-    const {showauth} = attributes
+    const {showAuth} = attributes
     const blockProps = useBlockProps();
 
     return (
@@ -19,17 +19,31 @@ registerBlockType('udemy-plus/header-tools', {
           <PanelBody title={ __('General', 'udemy-plus') }>
             <SelectControl 
             label={__('Show Login/Register link', 'udey-plus')}
-            value={showauth}
+            value={showAuth}
             options={[
                 {label: __('No', 'udemy-plus'), value: false},
                 {label: __('Yes', 'udemy-plus'), value: true}
             ]}
-            onChange={newVal => setAttributes({showauth: (newVal === "true")}) }
+            onChange={newVal => setAttributes({showAuth: (newVal === "true")}) }
+            />
+            <CheckboxControl
+              label={__('Show Login/Register Link', 'udemy-plus')}
+              help={
+                showAuth ?
+                __('Showing Link', 'udemy-plus') :
+                __('Hiding Link', 'udemy-plus')
+              }
+              checked ={showAuth}
+              onChange = {showAuth => setAttributes({ showAuth })}
+
             />
             Panel Body Content
           </PanelBody>
         </InspectorControls>
         <div { ...blockProps }>
+          {
+            showAuth ? 
+
           <a className="signin-link open-modal" href="#">
             <div className="signin-icon">
               <i className="bi bi-person-circle"></i>
@@ -39,6 +53,9 @@ registerBlockType('udemy-plus/header-tools', {
               My Account
             </div>
           </a>
+                      :
+                      null
+                    }
         </div>
       </>
     );

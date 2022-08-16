@@ -272,14 +272,14 @@ __webpack_require__.r(__webpack_exports__);
       setAttributes
     } = _ref;
     const {
-      showauth
+      showAuth
     } = attributes;
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('General', 'udemy-plus')
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Show Login/Register link', 'udey-plus'),
-      value: showauth,
+      value: showAuth,
       options: [{
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('No', 'udemy-plus'),
         value: false
@@ -288,9 +288,16 @@ __webpack_require__.r(__webpack_exports__);
         value: true
       }],
       onChange: newVal => setAttributes({
-        showauth: newVal === "true"
+        showAuth: newVal === "true"
       })
-    }), "Panel Body Content")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Show Login/Register Link', 'udemy-plus'),
+      help: showAuth ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Showing Link', 'udemy-plus') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Hiding Link', 'udemy-plus'),
+      checked: showAuth,
+      onChange: showAuth => setAttributes({
+        showAuth
+      })
+    }), "Panel Body Content")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, showAuth ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       className: "signin-link open-modal",
       href: "#"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -299,7 +306,7 @@ __webpack_require__.r(__webpack_exports__);
       className: "bi bi-person-circle"
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "signin-text"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("small", null, "Hello, Sign in"), "My Account"))));
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("small", null, "Hello, Sign in"), "My Account")) : null));
   }
 
 });
