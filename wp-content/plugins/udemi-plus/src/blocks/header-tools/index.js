@@ -42,7 +42,7 @@ registerBlockType('udemy-plus/header-tools', {
         </InspectorControls>
         <div { ...blockProps }>
           {
-            showAuth ? 
+            showAuth && 
 
           <a className="signin-link open-modal" href="#">
             <div className="signin-icon">
@@ -53,8 +53,7 @@ registerBlockType('udemy-plus/header-tools', {
               My Account
             </div>
           </a>
-                      :
-                      null
+                      
                     }
         </div>
       </>
