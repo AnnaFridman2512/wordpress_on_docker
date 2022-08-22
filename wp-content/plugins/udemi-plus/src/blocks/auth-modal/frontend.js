@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
             signinForm.getElementsByClassName.display = 'block'
             signupForm.getElementsByClassName.display = 'none'
-            signupForm.addEventListener('submit', event => {
+            signupForm.addEventListener('submit', async event => {
                 event.preventDefault()
 
                 const sinupFieldset = signinForm.querySelector('fieldset')
@@ -60,10 +60,74 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
                 `
 
-            })
+                const formData = {
+                    username: signupForm.querySelector('#su-name').value,
+                    email: signupForm.querySelector('#su-email').value,
+                    password: signupForm.querySelector('#su-password').value
 
+                }
+
+                const response = await fetch(up_auth_rest.signup, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const responseJSON = await response.json()
+
+                if(responseJSON.status ===2){
+                    signupStatus.innerHTML = `
+                    <div clss="modal-status modal-status-success">
+                        Success! Your account has been crated.
+                    </div>
+                    `
+
+                    location.reload()
+                }else{
+                    signupFieldset.removeAttribute('disabled')
+                    signupStatus.innerHTML= `
+                    <div class="modal-status modal-status-danger">
+                        Unable to create account! Please try again later.
+                    </div> 
+                    `
+                }
+
+                
+                
+            })
         }
 
+        })
+    })
+
+    signinForm.addEventListener('submit', async event =>{
+        event.preventDefault()
+
+        const signinFieldset = signinForm.querySelector('fieldset')
+        const signinStatus = signinForm.querySelector('#signin-status')
+
+        signinFieldset.setAttribute('disabled', true)
+        signinStatus.innerHTML = `
+            <div class="modal-status modal-status-info">
+                Please wait! We are loggin you  in.
+            </div>    
+            `
+
+
+        const formdata = {
+            user_login: signinForm.querySelector('#si-email').value,
+            password: signinForm.querySelector('#si-password').value
+        }   
+        
+        fetch(up_auth_rest.signin,{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify(formData)
         })
     })
 })
