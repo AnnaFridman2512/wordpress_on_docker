@@ -116,12 +116,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
             `
 
 
-        const formdata = {
+        const formData = {
             user_login: signinForm.querySelector('#si-email').value,
             password: signinForm.querySelector('#si-password').value
         }   
         
-        fetch(up_auth_rest.signin,{
+        const response = await fetch(up_auth_rest.signin,{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -129,5 +129,27 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
             body: JSON.stringify(formData)
         })
+
+        const responseJSON = await response.json()
+
+        if(responseJSON.status === 2){
+            signinForm.status = `
+            
+            <div class="modal-status modal-status-success">
+
+            Success! You are now logged in
+
+            </div>
+            `
+            location.reload()
+
+        }else{
+            signinFieldset.removeAttribute('disabled')
+            signinStatus.innerHTML = `
+            <div class="modal-status modal-status-danger">
+            Invalid credentials! Please try again later.
+            </div>
+            `
+        }
     })
 })
